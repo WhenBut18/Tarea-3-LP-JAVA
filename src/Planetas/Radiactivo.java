@@ -5,18 +5,21 @@ public class Radiactivo extends Planeta {
     private int radiacion;
     public Radiactivo(){
         super(4,5,0.2f,0.2f);
-        System.out.println("Planeta Radiactivo");
         this.radiacion = (int)Math.floor(Math.random() * ((50 - 10) + 1) + 10);
         this.uranio = (int)Math.floor(0.25 * (4 * Math.PI * Math.pow(getRadio(),2)));
+        setConsumoEnergia(0.3f * this.radiacion);
     }
 
     @Override
     public void printeador() {
+        System.out.println(">> LPaDOS: Preparando el protocolo de aterrizaje para Planeta Radiactivo");
         super.printeador();
-        System.out.print("Radiacion: ");
-        System.out.println(this.radiacion);
-        System.out.print("Uranio: ");
-        System.out.println(this.uranio);
-        System.out.println("<========================================>");
+        System.out.println(">> Uranio: " + this.uranio + "\n>> Radiacion: " + this.radiacion);
+    }
+    public int getUranio(){
+        return this.uranio;
+    }
+    public  int getRadiacion(){
+        return  this.radiacion;
     }
 }
