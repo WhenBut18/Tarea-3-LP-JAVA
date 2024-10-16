@@ -15,6 +15,23 @@ public class Volcanico extends Planeta {
         super.printeador();
         System.out.println(">> Platino: " + this.platino + "\n>> Temperatura: " + this.temperatura);
     }
+    @Override
+    public int extraerRecursos(int tipo) {
+        int Eleccion = super.extraerRecursos(tipo);
+        if (tipo == 3) {
+            if (Eleccion > this.platino) {
+                System.out.println(">> LPaDOS: No puedes extraer más recursos de los que tiene el planeta, cancelando" +
+                        " protocolo de extraccion");
+                return -1;
+            } else {
+                System.out.println(">> LPaDOS: Se han extraido " + Eleccion + " unidades de Platino.");
+                this.platino -= Eleccion;
+                return Eleccion;
+            }
+        } else {
+            return -1;
+        }
+    }
     public int getTemperatura(){
         return this.temperatura;
     }

@@ -16,6 +16,23 @@ public class Radiactivo extends Planeta {
         super.printeador();
         System.out.println(">> Uranio: " + this.uranio + "\n>> Radiacion: " + this.radiacion);
     }
+    @Override
+    public int extraerRecursos(int tipo) {
+        int Eleccion = super.extraerRecursos(tipo);
+        if (tipo == 3) {
+            if (Eleccion > this.uranio) {
+                System.out.println(">> LPaDOS: No puedes extraer más recursos de los que tiene el planeta, cancelando" +
+                        " protocolo de extraccion");
+                return -1;
+            } else {
+                System.out.println(">> LPaDOS: Se han extraido " + Eleccion + " unidades de Uranio.");
+                this.uranio -= Eleccion;
+                return Eleccion;
+            }
+        } else {
+            return -1;
+        }
+    }
     public int getUranio(){
         return this.uranio;
     }

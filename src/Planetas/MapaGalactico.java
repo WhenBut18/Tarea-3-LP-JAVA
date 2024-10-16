@@ -36,7 +36,8 @@ public class MapaGalactico {
     }
     public void setPlanetas(Planeta planeta){
         this.planetas.add(planeta);
-        this.planetas.add(5,planeta);
     }
-    public void
+    public void setPosicion(int salto) {
+        this.posicion += salto;
+    }
 }

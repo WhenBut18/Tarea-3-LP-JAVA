@@ -17,5 +17,4 @@ public class Helado extends Planeta {
     public int getTemperatura(){
         return this.temperatura;
     }
-
 }

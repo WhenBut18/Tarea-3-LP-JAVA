@@ -1,6 +1,7 @@
 package Planetas;
 import Player.Jugador;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class Planeta {
@@ -24,13 +25,36 @@ public class Planeta {
     }
 
     public int extraerRecursos(int tipo) {
-        int recurso;
         Scanner obj = new Scanner(System.in);
         System.out.println(">> LPaDOS: ¿Cuantas unidades quieres extraer?");
-        String Eleccion = obj.nextLine();
-        return  0;
+        int Eleccion = obj.nextInt();
+        if (tipo == 1) {
+            if (Eleccion > this.cristalesHidrogeno) {
+                System.out.println(">> LPaDOS: No puedes extraer más recursos de los que tiene el planeta, cancelando" +
+                        " protocolo de extraccion");
+                return -1;
+            } else {
+                System.out.println(">> LPaDOS: Se han extraido " + Eleccion + " unidades de Hidrogeno.");
+                this.cristalesHidrogeno -= Eleccion;
+                return Eleccion;
+            }
+        } else if (tipo == 2) {
+            if (Eleccion > this.floresDeSodio) {
+                System.out.println(">> LPaDOS: No puedes extraer más recursos de los que tiene el planeta, cancelando" +
+                        " protocolo de extraccion");
+                return -1;
+            } else {
+                System.out.println(">> LPaDOS: Se han extraido " + Eleccion + " unidades de Flores de Sodio.");
+                this.cristalesHidrogeno -= Eleccion;
+                return Eleccion;
+            }
+        } else {
+            return Eleccion;
+        }
     }
     public boolean salir() {
+        System.out.println(">> LPaDOS: Preparando protocolo de vuelo orbital.\n>> LPaDOS: Despegando....\n>> " +
+                "LPaDOS: Finalizando protocolo de vuelo orbital.\n>> LPaDOS: Hemos vuelto a la orbita del Planeta.");
         return true;
     }
     public Planeta(int supRadio, int infRadio, float ratioFloresDeSodio, float ratioHidrogeno) {
@@ -39,8 +63,8 @@ public class Planeta {
         this.cristalesHidrogeno = (int)Math.floor(ratioHidrogeno * (4 * Math.PI * Math.pow(this.radio,2)));
     }
     public void printeador() {
-        System.out.println(">> LPaDOS: Desplegando datos del Planeta...\n>> Radio: " + this.radio + "\n>> Cristales de " +
-                "Hidrogeno: " + this.cristalesHidrogeno + "\n>> Flores de Sodio: " + this.floresDeSodio);
+        System.out.println(">> LPaDOS: Desplegando datos del Planeta...\n>>    Radio: " + this.radio + "\n>>    Cristales de " +
+                "Hidrogeno: " + this.cristalesHidrogeno + "\n>>    Flores de Sodio: " + this.floresDeSodio);
     }
     public int getRadio(){
         return this.radio;
@@ -59,7 +83,7 @@ public class Planeta {
     public void setCristalesHidrogeno(int cristalesHidrogeno){
         this.cristalesHidrogeno -= cristalesHidrogeno;
     }
-    public void  setFloresDeSodio(int floresDeSodio){
+    public void setFloresDeSodio(int floresDeSodio){
         this.floresDeSodio = floresDeSodio;
     }
 }
