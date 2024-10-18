@@ -9,7 +9,7 @@ public class Nave {
     private float eficienciaPropulsor;
 
     public Nave() {
-        this.unidadesCombustible = 100f;
+        this.unidadesCombustible = 100.0f;
         this.eficienciaPropulsor = 0.0f;
     }
 
@@ -17,29 +17,28 @@ public class Nave {
         float unidadesConsumidas = 0.75f * (float) Math.pow(tamanoSalto, 2) * (1 - eficienciaPropulsor);
         Scanner obj = new Scanner(System.in);
         System.out.println(">> LPaDOS: Iniciando protocolo de salto.\n>> LPaDOS: Se usaran " + unidadesConsumidas +
-                " unidades de combustible.\n>> LPaDOS: ¿Quieres proceder con el protocolo?\n>>    Si (1)\n>>    " +
-                "No (2)");
+                " unidades de combustible.\n>> LPaDOS: ¿Quieres proceder con el protocolo?\n>>   (1) Si\n>>   " +
+                "(2) No ");
         int Eleccion = obj.nextInt();
         if (Eleccion == 1) {
             System.out.println(">> LPaDOS: SALTANDO AL HIPER-ESPACIO.");
-            if (unidadesConsumidas > this.unidadesCombustible) {
+            if (unidadesConsumidas >= this.unidadesCombustible) {
                 System.out.println(">> La nave se detiene de golpe mientras viajabas por el hiper-espacio.\n>> " +
                         "LPaDOS: ERROR DE CALCULO DE COMBUSTIBLE.\n>> LPaDOS: Nos hemos quedado sin combustible en " +
                         "pleno salto.\n>> LPaDOS: Nuestra aventura a terminado aqui, volveremos al planeta inicial." +
                         "\n>> LPaDOS: ACTIVANDO CAPSULA DE ESCAPE DE EMERGENCIA.\n>> Ves por la ventanilla de la " +
                         "capsula como te alejas rapidamente de tu nave.\n>> Te sumes en un estado de letargo hasta " +
                         "que llegues a un lugar seguro....");
-                // sistema de game over aqui
                 return false;
-            } else if (unidadesConsumidas == this.unidadesCombustible) {
-                unidadesCombustible -= unidadesConsumidas;
-                System.out.println(">> LPaDOS: Finalizando protocolo de salto, hemos llegado a la orbita del Planeta." +
-                        "\n>> LPaDOS: AVISO IMPORTANTE.\n>> LPaDOS: Este ultimo salto nos dejo con 0 unidades de " +
-                        "combustible, si no recargas combustible en este Planeta es posible que en siguiente salto al" +
-                        " hiper-espacio nos quedemos sin combustible y a la derivaba.");
-                return true;
             } else {
                 unidadesCombustible -= unidadesConsumidas;
+                int planetasCrear = (MG.getPosicion() + tamanoSalto + 1) - MG.getPlanetas().size();
+                if (planetasCrear > 0 && direccion == 1){
+                    for (int i = 0; i < planetasCrear; i++) {
+                        MG.setPlanetas(MG.generadorPlaneta());
+                    }
+                    System.out.println(">> LPaDOS: Durante el salto hemos descubierto otros " + (planetasCrear-1) + " Planetas aparte.");
+                }
                 System.out.println(">> LPaDOS: Finalizando protocolo de salto, hemos llegado a la orbita del Planeta.");
                 if (direccion == 1) {
                     MG.setPosicion(tamanoSalto);
@@ -57,10 +56,9 @@ public class Nave {
         }
 
     }
-    public void recargarPropulsores(int hidrogeno) {
+    public void setUnidadesCombustible(float hidrogeno) {
         float unidadesRecargadas = 0.6f * hidrogeno * (1 + eficienciaPropulsor);
-        System.out.println("Se han recargado " + unidadesRecargadas + " unidades de combustible");
-        this.unidadesCombustible = +unidadesCombustible;
+        this.unidadesCombustible += unidadesRecargadas;
     }
 
     public void setEficienciaPropulsor(float eficiencia) {
@@ -69,5 +67,8 @@ public class Nave {
     }
     public float getEficienciaPropulsor () {
         return this.eficienciaPropulsor;
+    }
+    public float getUnidadesCombustible () {
+        return  this.unidadesCombustible;
     }
 }

@@ -11,16 +11,17 @@ public class Planeta {
     private float consumoEnergia;
     public boolean visitar(Jugador jugador) {
         printeador();
+        System.out.println("╚═════════════════════════════════════════╛2");
         Scanner obj = new Scanner(System.in);
-        System.out.println(">> LPaDOS: ¿Quieres aterrizar en este Planeta? (Si/No)" );
-        String Eleccion = obj.nextLine();
-        if (Eleccion.equals("Si")){
+        System.out.println(">> LPaDOS: ¿Quieres aterrizar en este Planeta?\n>>    (1) Si\n>>    (2) No" );
+        int Eleccion = obj.nextInt();
+        if (Eleccion == 1){
             System.out.println(">> LPaDOS: Entrando al planeta, finalizando el protocolo de aterrizaje." + "\n>> LPaDOS: " +
                     "Aterrizaje completado.");
-            return true;
+            return false;
         } else {
             System.out.println((">> LPaDOS: Cancelando el protocolo de aterrizaje, nos mantenemos en la orbita"));
-            return false;
+            return true;
         }
     }
 
@@ -34,8 +35,6 @@ public class Planeta {
                         " protocolo de extraccion");
                 return -1;
             } else {
-                System.out.println(">> LPaDOS: Se han extraido " + Eleccion + " unidades de Hidrogeno.");
-                this.cristalesHidrogeno -= Eleccion;
                 return Eleccion;
             }
         } else if (tipo == 2) {
@@ -44,8 +43,6 @@ public class Planeta {
                         " protocolo de extraccion");
                 return -1;
             } else {
-                System.out.println(">> LPaDOS: Se han extraido " + Eleccion + " unidades de Flores de Sodio.");
-                this.cristalesHidrogeno -= Eleccion;
                 return Eleccion;
             }
         } else {
@@ -61,10 +58,12 @@ public class Planeta {
         this.radio = (int)Math.floor(Math.random() * ((Math.pow(10,supRadio) - Math.pow(10,infRadio)) + 1) + Math.pow(10,infRadio));
         this.floresDeSodio = (int)Math.floor(ratioFloresDeSodio * (4 * Math.PI * Math.pow(this.radio,2)));
         this.cristalesHidrogeno = (int)Math.floor(ratioHidrogeno * (4 * Math.PI * Math.pow(this.radio,2)));
+        this.consumoEnergia = 0;
     }
     public void printeador() {
-        System.out.println(">> LPaDOS: Desplegando datos del Planeta...\n>>    Radio: " + this.radio + "\n>>    Cristales de " +
-                "Hidrogeno: " + this.cristalesHidrogeno + "\n>>    Flores de Sodio: " + this.floresDeSodio);
+        System.out.println("╔═════════════════════════════════════════╕" +
+                "\n║>> LPaDOS: Desplegando datos del Planeta...\n║>>    Radio: " + this.radio + "\n║>>    Cristales de " +
+                "Hidrogeno: " + this.cristalesHidrogeno + "\n║>>    Flores de Sodio: " + this.floresDeSodio);
     }
     public int getRadio(){
         return this.radio;
@@ -81,9 +80,12 @@ public class Planeta {
         this.consumoEnergia = consumoEnergia;
     }
     public void setCristalesHidrogeno(int cristalesHidrogeno){
-        this.cristalesHidrogeno -= cristalesHidrogeno;
+        this.cristalesHidrogeno += cristalesHidrogeno;
     }
     public void setFloresDeSodio(int floresDeSodio){
-        this.floresDeSodio = floresDeSodio;
+        this.floresDeSodio += floresDeSodio;
+    }
+    public float getConsumoEnergia(){
+        return this.consumoEnergia;
     }
 }

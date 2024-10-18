@@ -40,4 +40,45 @@ public class MapaGalactico {
     public void setPosicion(int salto) {
         this.posicion += salto;
     }
+    public int getPosicion(){
+        return posicion;
+    }
+    public List<Planeta> getPlanetas(){
+        return  this.planetas;
+    }
+    public void printeador(){
+        System.out.print("PLANETA " + getPosicion() +" || Tipo: ");
+        if (planetas.get(posicion) instanceof Helado) {
+            System.out.println("HELADO");
+        } else if (planetas.get(posicion) instanceof Oceanico) {
+            System.out.println("OCEANICO");
+        } else if (planetas.get(posicion) instanceof Radiactivo) {
+            System.out.println("RADIACTIVO");
+        } else if (planetas.get(posicion) instanceof Volcanico) {
+            System.out.println("VOLCANICO");
+        } else {
+            System.out.println("CENTRO GALACTICO");
+        }
+    }
+    public void printeadorMapa(){
+        System.out.print("╔═════════════════════════════════════════╕\n║>> LPaDOS: Desplegando Mapa Galactico...");
+        for (int i = 0; i < planetas.size(); i++) {
+            System.out.print("\n║>>    ("+ i + ") PLANETA ");
+            if (planetas.get(i) instanceof Helado) {
+                System.out.print("HELADO");
+            } else if (planetas.get(i) instanceof Oceanico) {
+                System.out.print("OCEANICO");
+            } else if (planetas.get(i) instanceof Radiactivo) {
+                System.out.print("RADIACTIVO");
+            } else if (planetas.get(i) instanceof Volcanico) {
+                System.out.print("VOLCANICO");
+            } else {
+                System.out.print("CENTRO GALACTICO");
+            }
+            if (i == this.posicion) {
+                System.out.print(" <---- ESTAMOS ACA");
+            }
+        }
+        System.out.println("\n╚═════════════════════════════════════════╛");
+    }
 }
